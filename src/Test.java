@@ -24,19 +24,46 @@ public class Test extends Survey {
 		return correctAnswer;
 	}
 	
-	public void AddCorrectAnswer(String answer) {
-		correctAnswer.AddAnswer(answer);
-	}
-	
 	public void AskForCorrectAnswer() {
 		// Need to make this unique to each type of question
 		for (int i = 0; i < GetQuestions().size(); i++ ) {
 			Question currentQuestion = GetQuestions().get(i);
-			System.out.println(currentQuestion.GetQuestionType());
+			System.out.println("This Question Type: " + currentQuestion.GetQuestionType());
 			
-//			switch (currentQuestion.GetQuestionType()) {
-//			
-//			}
+			String answer;
+			ResponseCorrectAnswer rca = null;
+			
+			// Call super.AddResponse(), check if the response lives in Survey or Test
+			switch ( currentQuestion.GetQuestionType() ) {
+			case "TrueFalse":
+				System.out.println("What is the correct answer?");
+				answer = MainDriver.scanner.next();
+				rca = new ResponseCorrectAnswer(answer);
+				super.AddResponse(rca);
+				break;
+			case "MultipleChoice":
+				System.out.println("Which of these options");
+				GetQuestions().get(i).Display();
+				break;
+			case "Essay":
+				System.out.println("What is the correct answer?");
+				answer = MainDriver.scanner.next();
+				rca = new ResponseCorrectAnswer(answer);
+				super.AddResponse(rca);
+				break;
+			case "ShortAnswer":
+				System.out.println("What is the correct answer?");
+				answer = MainDriver.scanner.next();
+				rca = new ResponseCorrectAnswer(answer);
+				super.AddResponse(rca);
+				break;
+			case "Ranking":
+				break;
+			case "Matching":
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	

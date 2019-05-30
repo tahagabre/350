@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 
 public class ResponseCorrectAnswer implements java.io.Serializable{
-	ArrayList<String> rca;
+	String response = null;
+	
+	ResponseCorrectAnswer(String answer) {
+		this.response = response;
+	}
 	
 	ResponseCorrectAnswer() {
 		
 	}
 	
-	public void AddAnswer(String answer) {
-		rca.add(answer);
+	public String GetResponse() {
+		return response;
 	}
 }

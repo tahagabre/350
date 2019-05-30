@@ -27,6 +27,12 @@ public class Survey implements java.io.Serializable {
 		System.out.println("There are now " + questions.size() + " questions in this survey.");
 	}
 	
+	// Should only be predetermined on MultipleChoice, Ranking, Matching
+	// Otherwise, should call constructor at runtime
+	public void AddResponse(ResponseCorrectAnswer response) {
+		responses.add(response);
+	}
+	
 	public ArrayList<Question> GetQuestions() {
 		return questions;
 	}
@@ -44,15 +50,6 @@ public class Survey implements java.io.Serializable {
 	public void CreateQuestion() {
 		if ( TestFormInput(formType) ) {
 			TakeQuestion();
-			
-			System.out.println("Input question for your " + formType);
-			
-			if ( formType.equals("Test") ) {
-				System.out.println("What is the correct answer?");
-				
-				// Polymorphically add answer
-				( (Test) this ).AddCorrectAnswer( MainDriver.scanner.nextLine() );
-			}
 		
 			System.out.println("Finished adding question to your " + formType + ". Would you like to add another question? (y/n)");
 			
@@ -76,11 +73,13 @@ public class Survey implements java.io.Serializable {
 			TakeQuestion();
 		}
 	}
-
+	
+	// Perhaps send to an input/output class
 	boolean TestFormInput(String input) {
 		return input.equals("Survey") || input.equals("Test");
 	}
-
+	
+	// Perhaps send to an input/output class, low cohesion
 	void TakeQuestion() {
 	
 		System.out.println("What type of question would you like to create?");
