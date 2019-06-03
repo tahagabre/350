@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class Survey implements java.io.Serializable {
-	protected ArrayList<ResponseCorrectAnswer> responses;
+	
 	protected ArrayList<Question> questions;
 	protected String name;
 	
 	private String formType = "Survey";
 	
 	Survey(String name) {
-		responses = new ArrayList<ResponseCorrectAnswer>();
+		
 		questions = new ArrayList<Question>();
 		this.name = name;
 		
@@ -17,7 +17,6 @@ public class Survey implements java.io.Serializable {
 	
 	// Empty Constructor 
 	Survey() {
-		responses = null; 
 		questions = null;
 		name = null;
 	}
@@ -25,12 +24,6 @@ public class Survey implements java.io.Serializable {
 	public void AddQuestion(Question newQuestion) {
 		questions.add(newQuestion);
 		System.out.println("There are now " + questions.size() + " questions in this survey.");
-	}
-	
-	// Should only be predetermined on MultipleChoice, Ranking, Matching
-	// Otherwise, should call constructor at runtime
-	public void AddResponse(ResponseCorrectAnswer response) {
-		responses.add(response);
 	}
 	
 	public ArrayList<Question> GetQuestions() {
@@ -47,6 +40,7 @@ public class Survey implements java.io.Serializable {
 		}
 	}
 	
+	// Need to add response to question
 	public void CreateQuestion() {
 		if ( TestFormInput(formType) ) {
 			TakeQuestion();

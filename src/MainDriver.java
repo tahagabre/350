@@ -5,7 +5,7 @@ import java.nio.file.Files;
 public class MainDriver {
 	
 	static Scanner scanner = new Scanner(System.in);
-	
+//	static CreateMenu createMenu = new CreateMenu();
 	static Survey form = null;
 	static Serializer serializer = new Serializer();
 	
@@ -14,9 +14,8 @@ public class MainDriver {
 	}
 	
 	static void Start() {
-		System.out.println("Would you like to create or load a survey? (c/l)");
-		String response = scanner.next();
-		
+		System.out.println("c/l/d");
+		String response = MainDriver.scanner.next();
 		ChooseOperation(response);
 	}
 	
@@ -30,8 +29,7 @@ public class MainDriver {
 			
 		case "l":
 			File folder = null;
-			System.out.println("Would you like to load a Test or Survey? (t/s)");
-			
+			System.out.println("Survey or test? (s/t)");
 			if (scanner.next().equals("s")) {
 				folder = new File("./Surveys");
 				path = "./Surveys/";
@@ -46,8 +44,7 @@ public class MainDriver {
 				System.out.println("Invalid input: Enter 't' or 's'");
 				ChooseOperation("l");
 			}
-			
-			System.out.println( folder.exists() );
+
 			String[] filesInDirectory = folder.list();
 			System.out.println("Select a file to load:");
 			
@@ -58,6 +55,8 @@ public class MainDriver {
 			String fileName = scanner.next();
 			
 			Survey survey = serializer.Load(path + fileName);
+			System.out.println(survey);
+			survey.Display();
 			break;
 			
 		default:
@@ -68,7 +67,7 @@ public class MainDriver {
 	}
 	
 	static void RequestSurveyType() {
-		System.out.println("Would you like a Survey or Test?");
+		System.out.println("Would you like a Survey or Test? (t/s)");
 		
 		// Create Form
 		String formType = scanner.next();
@@ -79,7 +78,7 @@ public class MainDriver {
 		
 			CreateForm(formType, name);
 		
-			System.out.println("Would you like to save this Survey? (y/n)");
+			System.out.println("save? y/n");
 			String shouldSave = scanner.next();
 			
 			if ( shouldSave.equals("y") ) {
@@ -95,16 +94,16 @@ public class MainDriver {
 	}
 	
 	static boolean TestFormInput(String input) {
-		return input.equals("Survey") || input.equals("Test");
+		return input.equals("s") || input.equals("t");
 	}
 	
 	// Choose Survey/Test and start taking Questions
 	static void CreateForm(String formType, String name) {
 		switch (formType) {
-		case "Survey":
+		case "s":
 			form = new Survey(name);
 			break;
-		case "Test":
+		case "t":
 			form = new Test(name);
 			break;
 		default:

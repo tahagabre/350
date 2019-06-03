@@ -4,7 +4,7 @@ public class ResponseCorrectAnswer implements java.io.Serializable{
 	String response = null;
 	
 	ResponseCorrectAnswer(String answer) {
-		this.response = response;
+		this.response = answer;
 	}
 	
 	ResponseCorrectAnswer() {

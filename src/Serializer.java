@@ -7,7 +7,6 @@ public class Serializer {
 	public void Save(Survey survey, String filename) {
 		try {
 	         FileOutputStream fileOut = null;
-	         System.out.println( survey.GetFormType() );
 	         
 	         if ( survey.GetFormType().equals("Survey") ) {
 	        	 fileOut = new FileOutputStream("./Surveys/" + filename);
@@ -21,10 +20,11 @@ public class Serializer {
 	         out.writeObject(survey);
 	         out.close();
 	         fileOut.close();
+	         System.out.println(survey.GetFormType() + " saved as " + survey.name);
 	      }
 		
 		catch (IOException error) {
-	         error.getMessage();
+	         System.out.println(error.getMessage() );
 	      }
 	}
 

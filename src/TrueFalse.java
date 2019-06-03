@@ -13,4 +13,8 @@ public class TrueFalse extends Question {
 	public String GetQuestionType() {
 		return questionType;
 	}
+	
+	public String GetOptions(int index) {
+		return options[index];
+	}
 }

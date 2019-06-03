@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 public class MultipleChoice extends TrueFalse {
-	String[] questionPrefix = new String[] {"A. ", "B. ", "C. ", "D. "};
+	String[] questionPrefix = new String[] {"1. ", "2. ", "3. ", "4. "};
 	ArrayList<String> options;
 	String questionType = null;
 	
@@ -17,5 +17,11 @@ public class MultipleChoice extends TrueFalse {
 	
 	public ArrayList<String> GetOptions() {
 		return options;
+	}
+	
+	public void Display() {
+		for ( int i = 0; i < options.size(); i++ ) {
+			System.out.println(questionPrefix[i] + options.get(i) );
+		}
 	}
 }

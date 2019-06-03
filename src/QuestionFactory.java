@@ -20,7 +20,7 @@ class QuestionFactory {
 				int index = 0;
 				int choicesQuantity;
 				
-				System.out.println("How many choices do you want for this question?");
+				System.out.println("How many choices do you want for this question? (Max 4)");
 				choicesQuantity = scanner.nextInt();
 				ArrayList<String> choices = new ArrayList<String>();
 				
