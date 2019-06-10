@@ -5,6 +5,11 @@
  * Default menu, called on whenever each operation is complete
  */
 //
-public class StartMenu {
-
+public class StartMenu extends Menu{
+	
+	StartMenu() {
+		String nextMenu = super.RequestNextMenu();
+		super.MoveToNextMenu(nextMenu, null);
+	}
+	
 }

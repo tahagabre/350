@@ -2,26 +2,21 @@
 import java.util.ArrayList;
 public class MultipleChoice extends TrueFalse {
 	String[] questionPrefix = new String[] {"1. ", "2. ", "3. ", "4. "};
-	ArrayList<String> options;
-	String questionType = null;
+	private ArrayList<ResponseCorrectAnswer> options;
 	
-	MultipleChoice(String question, ArrayList<String> options) {
+	MultipleChoice(String question, ArrayList<ResponseCorrectAnswer> options) {
 		super(question);
 		this.options = options;
-		questionType = "MultipleChoice";
+		super.SetQuestionType("MultipleChoice");
 	}
 	
-	public String GetQuestionType() {
-		return questionType;
-	}
-	
-	public ArrayList<String> GetOptions() {
+	public ArrayList<ResponseCorrectAnswer> GetOptions() {
 		return options;
 	}
 	
 	public void Display() {
 		for ( int i = 0; i < options.size(); i++ ) {
-			System.out.println(questionPrefix[i] + options.get(i) );
+			System.out.println(questionPrefix[i] + options.get(i).GetResponse() );
 		}
 	}
 }

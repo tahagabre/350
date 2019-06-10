@@ -34,14 +34,27 @@ public class Survey implements java.io.Serializable {
 		return formType;
 	}
 	
+	public String GetName() {
+		return name;
+	}
+	
 	public void Display() {
-		for (int i = 0; i < questions.size(); i++) {
-			questions.get(i).Display();
+		switch (formType) {
+		case "Survey":
+			for (int i = 0; i < questions.size(); i++) {
+				System.out.print("Question " + (i + 1) + ": ");
+				questions.get(i).Display();
+			}
+			break;
+		case "Test":
+			( (Test) this).Display(true);
+			break;
 		}
+		
 	}
 	
 	// Need to add response to question
-	public void CreateQuestion() {
+	private void CreateQuestion() {
 		if ( TestFormInput(formType) ) {
 			TakeQuestion();
 		
@@ -69,14 +82,14 @@ public class Survey implements java.io.Serializable {
 	}
 	
 	// Perhaps send to an input/output class
-	boolean TestFormInput(String input) {
+	private boolean TestFormInput(String input) {
 		return input.equals("Survey") || input.equals("Test");
 	}
 	
-	// Perhaps send to an input/output class, low cohesion
-	void TakeQuestion() {
+	private void TakeQuestion() {
 	
 		System.out.println("What type of question would you like to create?");
+		System.out.println("T/F, MultipleChoice, ShortAnswer, Essay, Matching, Ranking?");
 		String questionType = MainDriver.scanner.next();
 		String prompt;
 		Question q;
@@ -84,7 +97,8 @@ public class Survey implements java.io.Serializable {
 		switch (questionType) {
 			case "T/F":
 				System.out.println("Please input question prompt");
-				prompt = MainDriver.scanner.next();
+				MainDriver.scanner.nextLine();
+				prompt = MainDriver.scanner.nextLine();
 								
 				q = QuestionFactory.Create(questionType, prompt);
 				AddQuestion(q);
@@ -92,7 +106,8 @@ public class Survey implements java.io.Serializable {
 				
 			case "MultipleChoice":
 				System.out.println("Please input question prompt");
-				prompt = MainDriver.scanner.next();
+				MainDriver.scanner.nextLine();
+				prompt = MainDriver.scanner.nextLine();
 				
 				q = QuestionFactory.Create(questionType, prompt);
 				AddQuestion(q);
@@ -100,7 +115,8 @@ public class Survey implements java.io.Serializable {
 				
 			case "ShortAnswer":
 				System.out.println("Please input question prompt");
-				prompt = MainDriver.scanner.next();
+				MainDriver.scanner.nextLine();
+				prompt = MainDriver.scanner.nextLine();
 				
 				q = QuestionFactory.Create(questionType, prompt);
 				AddQuestion(q);
@@ -108,7 +124,8 @@ public class Survey implements java.io.Serializable {
 				
 			case "Essay":
 				System.out.println("Please input question prompt");
-				prompt = MainDriver.scanner.next();
+				MainDriver.scanner.nextLine();
+				prompt = MainDriver.scanner.nextLine();
 				
 				q = QuestionFactory.Create(questionType, prompt);
 				AddQuestion(q);
@@ -116,7 +133,8 @@ public class Survey implements java.io.Serializable {
 				
 			case "Matching":
 				System.out.println("Please input question prompt");
-				prompt = MainDriver.scanner.next();
+				MainDriver.scanner.nextLine();
+				prompt = MainDriver.scanner.nextLine();
 				
 				q = QuestionFactory.Create(questionType, prompt);
 				AddQuestion(q);
@@ -124,7 +142,8 @@ public class Survey implements java.io.Serializable {
 				
 			case "Ranking":
 				System.out.println("Please input question prompt");
-				prompt = MainDriver.scanner.next();
+				MainDriver.scanner.nextLine();
+				prompt = MainDriver.scanner.nextLine();;
 				
 				q = QuestionFactory.Create(questionType, prompt);
 				AddQuestion(q);

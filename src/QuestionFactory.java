@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class QuestionFactory {
-	private static Scanner scanner = new Scanner(System.in);
-	
 	QuestionFactory() {}
 	
 	public static Question Create(String questionType, String prompt) {
@@ -17,18 +15,26 @@ class QuestionFactory {
 				break;
 			
 			case "MultipleChoice":
-				int index = 0;
-				int choicesQuantity;
+				int choicesQuantity = 0;
 				
 				System.out.println("How many choices do you want for this question? (Max 4)");
-				choicesQuantity = scanner.nextInt();
-				ArrayList<String> choices = new ArrayList<String>();
+				
+				choicesQuantity = MainDriver.scanner.nextInt();
+				
+				MainDriver.scanner.nextLine();	
+				
+				if (choicesQuantity > 4) {
+					return Create("MultipleChoice", prompt);
+				}
+				
+				ArrayList<ResponseCorrectAnswer> choices = new ArrayList<ResponseCorrectAnswer>();
 				
 				while ( choices.size() < choicesQuantity ) {
 					System.out.println("Enter choice #" + (choices.size() + 1) );
-					choices.add( scanner.next() );
-					index ++;
+					ResponseCorrectAnswer rca = new ResponseCorrectAnswer( MainDriver.scanner.nextLine() );
+					choices.add(rca);
 				}
+				
 				question = new MultipleChoice(prompt, choices);
 				System.out.println("MultipleChoice Created");
 				break;
@@ -53,8 +59,6 @@ class QuestionFactory {
 				// Prompt user for second options
 //				Matching matching = new Matching(prompt, secondOptions);
 				break;
-			default:
-					// Throw error
 		}
 		
 		return question;

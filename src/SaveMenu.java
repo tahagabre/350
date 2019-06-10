@@ -11,6 +11,20 @@
  *  	Serializer
  */
 
-public class SaveMenu {
-
+public class SaveMenu extends Menu{
+	private Serializer serializer;
+	
+	SaveMenu(Survey survey) {
+		
+		if ( survey == null ) {
+			System.out.println("You must create a Survey/Test before saving.");
+			super.MoveToNextMenu("B", null);
+		}
+		
+		serializer = new Serializer();
+		serializer.Save(survey);
+		
+		String nextMenu = super.RequestNextMenu();
+		super.MoveToNextMenu(nextMenu, null);
+	}
 }
